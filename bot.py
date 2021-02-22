@@ -8,6 +8,10 @@ import re
 import requests
 from report import Report
 
+#Set up global variables
+auto_ban_threshold = 0.9
+auto_delete_threshold = 0.8
+
 # Set up logging to the console
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -70,6 +74,7 @@ class ModBot(discord.Client):
             await self.handle_dm(message)
 
     async def handle_dm(self, message):
+
         # Handle a help message
         if message.content == Report.HELP_KEYWORD:
             reply =  "Use the `report` command to begin the reporting process.\n"
@@ -92,6 +97,9 @@ class ModBot(discord.Client):
         responses = await self.reports[author_id].handle_message(message)
         for r in responses:
             await message.channel.send(r)
+            if 'FINAL REPORT' in r:
+                for channel in self.mod_channels.values():
+                    await channel.send(r)
 
         # If the report is complete or cancelled, remove it from our map
         if self.reports[author_id].report_complete():
@@ -116,9 +124,9 @@ class ModBot(discord.Client):
                 await mod_channel.send('Message was deleted' + message.author.name + message.content)
                 await message.delete()
 
-            if score <= 0.84 and score > 0.75:
+            elif score <= 0.84 and score > 0.75:
                 await mod_channel.send('User was warned' + message.author.name + message.content)
-                await message.author.send('Your message goes against our guidelines')
+                await message.author.send(f'Your message \n `{message.content}` goes against our guidelines')
 
 
 

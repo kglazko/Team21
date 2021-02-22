@@ -25,14 +25,14 @@ class Report:
     def __init__(self, client):
         self.state = State.REPORT_START
         self.client = client
-        self.reporter = None
-        self.message = None
+        self.reporter = ""
+        self.message = ""
         self.message_raw = None
-        self.author = None
-        self.abuse_type = None
-        self.abuse_details = None
-        self.comments = None
-        self.mods = None
+        self.author = ""
+        self.abuse_type = ""
+        self.abuse_details = ""
+        self.comments = ""
+        self.mods = ""
     
     async def handle_message(self, message):
         '''
@@ -127,7 +127,7 @@ class Report:
                 self.abuse_type = "Bullying or harrassment"
                 report_intro = "**Who is being bullied?\n**"
                 report_options = "`M` Myself\n"
-                report_options = "`SE` Someone else\n"
+                report_options += "`SE` Someone else\n"
                 return [report_intro + report_options]
 
         if self.state== State.AWAITING_DETAILS:
@@ -206,7 +206,7 @@ class Report:
                 report_string += "**Abuse Type: **" + self.abuse_type + "\n"
                 report_string += "**Abuse Details: **" + self.abuse_details + "\n"
                 report_string += "**Comments: **" + self.comments + "\n"
-                report_sample += report_sample_generate + "**Please enter any final comments**"
+                report_sample = report_sample_generate + "**Please enter any final comments**"
                 return [report_string + report_sample]
 
         if self.state == State.FINALIZING_REPORT:
@@ -229,15 +229,7 @@ class Report:
 
 
     def report_complete(self):
-        report_title = "**FINAL REPORT**\n"
-        report_string = "**Reporter: **" + self.reporter + "\n"
-        report_string += "**Message: **" + self.message + "\n"
-        report_string += "**Author: **" + self.author + "\n"
-        report_string += "**Abuse Type: **" + self.abuse_type + "\n"
-        report_string += "**Abuse Details: **" + self.abuse_details + "\n"
-        report_string += "**Comments: **" + self.comments + "\n"
-        mod_channel = self.client.mod_channels[self.message_raw.guild.id]
-        self.mods = mod_channel.send(report_title + report_string)
+    
         return self.state == State.REPORT_COMPLETE
     
 
