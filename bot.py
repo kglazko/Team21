@@ -97,6 +97,7 @@ class ModBot(discord.Client):
         if self.reports[author_id].report_complete():
             self.reports.pop(author_id)
 
+
     async def handle_channel_message(self, message):
         # Only handle messages sent in the "group-#" channel
         if not message.channel.name == f'group-{self.group_num}':
@@ -108,6 +109,18 @@ class ModBot(discord.Client):
 
         scores = self.eval_text(message)
         await mod_channel.send(self.code_format(json.dumps(scores, indent=2)))
+
+        #Automoderate based on threshold
+        for attr, score in scores.items():
+            if score >= 0.85:
+                await mod_channel.send('Message was deleted' + message.author.name + message.content)
+                await message.delete()
+
+            if score <= 0.84 && > 0.75:
+                await mod_channel.send('User was warned' + message.author.name + message.content)
+                await.message.author.send('Your message goes against our guidelines. Please delete it and be aware of such messages in the future.')
+
+
 
     def eval_text(self, message):
         '''
