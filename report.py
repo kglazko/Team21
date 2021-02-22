@@ -117,6 +117,7 @@ class Report:
             if message.content == self.VIOLENCE_KEYWORD:
                 self.state = State.AWAITING_DETAILS
                 self.abuse_type = "Violence or dangerous organizations"
+                report_intro = "**What kind of violence are you reporting?\n**"
                 report_options = "`V` Violent threat\n"
                 report_options += "`D` Dangerous organizations or individuals\n"
                 return [report_intro + report_options]

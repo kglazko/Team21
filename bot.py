@@ -116,9 +116,9 @@ class ModBot(discord.Client):
                 await mod_channel.send('Message was deleted' + message.author.name + message.content)
                 await message.delete()
 
-            if score <= 0.84 && > 0.75:
+            if score <= 0.84 and score > 0.75:
                 await mod_channel.send('User was warned' + message.author.name + message.content)
-                await.message.author.send('Your message goes against our guidelines. Please delete it and be aware of such messages in the future.')
+                await message.author.send('Your message goes against our guidelines')
 
 
 
