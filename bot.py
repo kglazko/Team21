@@ -54,8 +54,7 @@ class ModBot(discord.Client):
         print('Press Ctrl-C to quit.')
 
         # Parse the group number out of the bot's name
-        match = re.search('[gG]roup (\d+) [bB]ot', self.user.name)
-        if match:
+        if match := re.search('[gG]roup (\d+) [bB]ot', self.user.name):
             self.group_num = match.group(1)
         else:
             raise Exception("Group number not found in bot's name. Name format should be \"Group # Bot\".")
