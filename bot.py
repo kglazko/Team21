@@ -310,7 +310,7 @@ class ModBot(discord.Client):
                                 },
             'doNotStore': True
         }
-        response = requests.post(url, data=json.dumps(data_dict))
+        response = requests.post(url, data=json.dumps(data_dict), timeout=60)
         response_dict = response.json()
 
         scores = {}
@@ -336,7 +336,7 @@ class ModBot(discord.Client):
                                 },
             'doNotStore': True
         }
-        response = requests.post(url, data=json.dumps(data_dict))
+        response = requests.post(url, data=json.dumps(data_dict), timeout=60)
         response_dict = response.json()
 
         scores = {}
