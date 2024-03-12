@@ -140,10 +140,10 @@ class ModBot(discord.Client):
                             num_warnings = self.perp_warnings[perp_index]
 
                             await channel.send(f'User `{perp_name}` was sent a warning for excessive abuse for `{final_message}`')
-                            await perp.send(f'A message you sent has been flagged as abusive.\n This is your ' + str(num_warnings) + '/3 warning.')
+                            await perp.send('A message you sent has been flagged as abusive.\n This is your ' + str(num_warnings) + '/3 warning.')
 
                             if num_warnings >=3:
-                                await perp.send(f'You have been banned.')
+                                await perp.send('You have been banned.')
                                 await channel.send(f'User `{perp_name}` was banned for being a baddie.')
                                 await message.author.send(f'`{perp_name}` has been banned for multiple incidents of abuse. Thank you for your report.')
                             await message.author.send(f'`{perp_name}` was sent an automatic warning. Thank you for your report.')
@@ -205,16 +205,16 @@ class ModBot(discord.Client):
                             num_warnings = self.perp_warnings[perp_index]
 
                         if "Warn" in r:
-                            await perp.send(f'A message you sent has been flagged as abusive.\n This is your ' + str(num_warnings) + '/3 warning.')
+                            await perp.send('A message you sent has been flagged as abusive.\n This is your ' + str(num_warnings) + '/3 warning.')
                             await victim.send(f'`{perp_name}` was sent an automatic warning. Thank you for your report.')
 
                         if "Delete" in r:
-                            await perp.send(f'A message you sent has been flagged as abusive.\n This is your ' + str(num_warnings) + '/3 warning.')
+                            await perp.send('A message you sent has been flagged as abusive.\n This is your ' + str(num_warnings) + '/3 warning.')
                             await victim.send(f'`{perp_name}` was sent an automatic warning and the message `{msg_to_delete}` will be removed. \n Thank you for your report.')
                             await self.messages_correlated[index].delete()
 
                         if "Ban" in r:
-                            await perp.send(f'You have been banned.')
+                            await perp.send('You have been banned.')
                             await victim.send(f'`{perp_name}` was banned and the message `{msg_to_delete}` will be removed. \n Thank you for your report.')
                             await self.messages_correlated[index].delete()
 
