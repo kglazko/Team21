@@ -52,7 +52,7 @@ class HatebaseAPI:
         payload = "api_key=" + self.key
 
         # perform authentication request
-        response = requests.post(url, data=payload, headers=self.headers)
+        response = requests.post(url, data=payload, headers=self.headers, timeout=60)
 
         try:
             token = response.json()["result"]["token"]
@@ -94,7 +94,7 @@ class HatebaseAPI:
         if self.debug == True:
             print("url: {}\npayload: {}".format(url, payload))
         # perform query
-        response = requests.post(url, data=payload, headers=self.headers)
+        response = requests.post(url, data=payload, headers=self.headers, timeout=60)
         if self.debug == True:
             print("response: {}".format(response))
         resp_json = response.json()
@@ -124,7 +124,7 @@ class HatebaseAPI:
         if self.debug == True:
             print("url: {}\npayload: {}".format(url, payload))
         # perform query
-        response = requests.post(url, data=payload, headers=self.headers)
+        response = requests.post(url, data=payload, headers=self.headers, timeout=60)
         if self.debug == True:
             print("response: {}".format(response))
         resp_json = response.json()
@@ -153,7 +153,7 @@ class HatebaseAPI:
         if self.debug == True:
             print("url: {}\npayload: {}".format(url, payload))
         # perform query
-        response = requests.post(url, data=payload, headers=self.headers)
+        response = requests.post(url, data=payload, headers=self.headers, timeout=60)
         if self.debug == True:
             print("response: {}".format(response))
         resp_json = response.json()
@@ -181,7 +181,7 @@ class HatebaseAPI:
         if self.debug == True:
             print("url: {}\npayload: {}".format(url, payload))
         # perform query
-        response = requests.post(url, data=payload, headers=self.headers)
+        response = requests.post(url, data=payload, headers=self.headers, timeout=60)
         if self.debug == True:
             print("response: {}".format(response))
         resp_json = response.json()
@@ -210,7 +210,7 @@ class HatebaseAPI:
         if self.debug == True:
             print("url: {}\npayload: {}".format(url, payload))
         # perform query
-        response = requests.post(url, data=payload, headers=self.headers)
+        response = requests.post(url, data=payload, headers=self.headers, timeout=60)
         if self.debug == True:
             print("response: {}".format(response))
         resp_json = response.json()
